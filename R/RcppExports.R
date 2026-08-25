@@ -2,6 +2,6 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 cpp_update_position_inflow <- function(x, y, ux, uy, up, K, dt, drift_destination) {
-    .Call('_LPT_cpp_update_position_inflow', PACKAGE = 'LPT', x, y, ux, uy, up, K, dt, drift_destination)
+    .Call(`_LPT_cpp_update_position_inflow`, x, y, ux, uy, up, K, dt, drift_destination)
 }
 
