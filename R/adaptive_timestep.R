@@ -1,32 +1,37 @@
-#' Compute Adaptive Time Step at Each Iteration
+#' Compute Adaptive Time Step
 #'
-#' This function calculates an adaptive time step to use in a simulation based on the distance to the next position and the current flow velocity. The adaptive time step helps improve the accuracy and stability of the simulation by adjusting the time step dynamically based on the current flow conditions.
+#' Computes an adaptive time step based on the distance to the next position
+#' and the current flow velocity. If the flow velocity is zero, a minimum
+#' velocity is used to avoid an infinite time step.
 #'
-#' @param distance The distance between the current position and the next position in the simulation.
-#' @param vel The flow velocity at the current position.
-#' @return The computed adaptive time step for the simulation.
+#' @param distance Numeric. Distance to the next position, in meters.
+#' @param vel Numeric. Flow velocity at the current position, in meters per
+#'   second.
+#' @param vel_min Numeric. Minimum flow velocity, in meters per second, used
+#'   to calculate the time step when `vel` is zero. Defaults to `0.1`.
+#'
+#' @return A numeric value representing the adaptive time step, in seconds.
+#'
 #' @export
 #'
 #' @examples
-#' # Calculate the adaptive time step for a simulation
-#' distance <- 2.5 # meters
-#' vel <- 0.1 # meters per second
-#' adaptive_timestep(distance, vel)
-adaptive_timestep <- function(distance,vel,vel_min=0.1) {
-  
+#' # Calculate the adaptive time step
+#' adaptive_timestep(distance = 2.5, vel = 0.1)
+#'
+#' # Use a custom minimum velocity when velocity is zero
+#' adaptive_timestep(distance = 2.5, vel = 0, vel_min = 0.05)
+adaptive_timestep <- function(distance, vel, vel_min = 0.1) {
+
   if (vel == 0) {
-    
-    # to avoid dt = Inf if vel = 0
-    dt <- 1/4*distance/vel_min
-    
+
+    # Avoid dt = Inf when vel = 0
+    dt <- 1 / 4 * distance / vel_min
+
   } else {
-    
-    dt <- 1/4*distance/vel
-    
+
+    dt <- 1 / 4 * distance / vel
+
   }
-  
-  
-  
+
   return(dt)
-  
 }

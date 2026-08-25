@@ -2,24 +2,31 @@
 % Please edit documentation in R/adaptive_timestep.R
 \name{adaptive_timestep}
 \alias{adaptive_timestep}
-\title{Compute Adaptive Time Step at Each Iteration}
+\title{Compute Adaptive Time Step}
 \usage{
 adaptive_timestep(distance, vel, vel_min = 0.1)
 }
 \arguments{
-\item{distance}{The distance between the current position and the next position in the simulation.}
+\item{distance}{Numeric. Distance to the next position, in meters.}
 
-\item{vel}{The flow velocity at the current position.}
+\item{vel}{Numeric. Flow velocity at the current position, in meters per
+second.}
+
+\item{vel_min}{Numeric. Minimum flow velocity, in meters per second, used
+to calculate the time step when `vel` is zero. Defaults to `0.1`.}
 }
 \value{
-The computed adaptive time step for the simulation.
+A numeric value representing the adaptive time step, in seconds.
 }
 \description{
-This function calculates an adaptive time step to use in a simulation based on the distance to the next position and the current flow velocity. The adaptive time step helps improve the accuracy and stability of the simulation by adjusting the time step dynamically based on the current flow conditions.
+Computes an adaptive time step based on the distance to the next position
+and the current flow velocity. If the flow velocity is zero, a minimum
+velocity is used to avoid an infinite time step.
 }
 \examples{
-# Calculate the adaptive time step for a simulation
-distance <- 2.5 # meters
-vel <- 0.1 # meters per second
-adaptive_timestep(distance, vel)
+# Calculate the adaptive time step
+adaptive_timestep(distance = 2.5, vel = 0.1)
+
+# Use a custom minimum velocity when velocity is zero
+adaptive_timestep(distance = 2.5, vel = 0, vel_min = 0.05)
 }

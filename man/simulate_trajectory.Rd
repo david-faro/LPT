@@ -39,20 +39,3 @@ properties (e.g., turbulence) at each iteration. The interpolation is performed 
 the provided `lst_neighbours`, which represents the matrix of nearest neighbors
 for each node in the flow field.
 }
-\examples{
-# Define flow data and initial position
-flow_df <- data.frame(
-  x = c(1, 2, 3, 4, 5),
-  y = c(2, 4, 6, 8, 10),
-  vel_x = c(0.1, 0.2, 0.3, 0.4, 0.5),
-  vel_y = c(0.5, 0.4, 0.3, 0.2, 0.1),
-  K = c(0.01, 0.02, 0.03, 0.04, 0.05),
-  depth = c(1, 2, 3, 4, 5),
-  boundary = c("dry", "wet", "wet", "outflow", "dry")
-)
-pos0 <- list(x = 1, y = 2, id = 1)
-n.it <- 100
-up <- 0.1
-lst_neighbours <- matrix(c(2, 3, 1, 3, 4, 2, 4, 5, 3, 5, 4, 2, 5, 3, 1), ncol = 3)
-simulate_trajectory2(flow_df, pos0, n.it, up, lst_neighbours)
-}
